@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$1" == "" ] || [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+    echo "usage:"
+    echo "igrep search_word"
+    exit 0
+fi
+
+grep --color=auto "$1" ./ -rn --color=always 2> /dev/null | awk -F ":" 'BEGIN{OFS=":"}{printf("%s%s%s%s",$1," + ",$2,"\t");$1="";$2="";print $0}'
+

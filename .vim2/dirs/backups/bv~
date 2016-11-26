@@ -1,0 +1,43 @@
+#!/bin/bash
+
+echo "Usage:"
+echo -e "\t -f\t\t\t: build tags in current direntory"
+echo -e "\t -b conf\t\t: build by config file"
+echo -e "\t -u\t\t\t: update tags"
+echo -e "\t -r\t\t\t: remove all tags"
+
+
+if [ "$1" == "-f" ]; then
+    find . -name "*.h" -o -name "*.c" -o -name "*.cpp" -type f > cscope.files 2> /dev/null
+elif [ "$1" == "-b" ]; then
+    if [ -e $2 ]; then
+        rm -rf cscope.* tags
+        cat $2 | while read LINE
+        do
+            #echo $LINE
+            if [ -d $LINE ]; then
+                echo "find $LINE $FIND_ARGS"
+                find $LINE -name "*.h" -o -name "*.c" -o -name "*.cpp" -type f >> cscope.files 2> /dev/null
+            elif [ -f $LINE ]; then
+                echo $LINE >> cscope.files 2> /dev/null
+            fi
+        done
+    fi
+elif [ "$1" == "-u" ]; then
+    rm -rf cscope.* ctags tags
+elif [ "$1" == "-r" ]; then
+    rm -rf cscope.* ctags tags
+    exit 0
+else
+    exit 0
+fi
+
+echo "start build cscope..."
+cscope -bkq -i cscope.files 2> /dev/null
+echo "end build cscope"
+
+echo "start build ctags..."
+ctags -L cscope.files -f tags 2> /dev/null
+echo "end build ctags"
+
+exit 0

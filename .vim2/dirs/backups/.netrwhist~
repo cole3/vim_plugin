@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/osmc/.kodi/userdata/addon_data/script.module.keyboard.chinese'
+let g:netrw_dirhist_2='/home/osmc/.kodi/userdata/addon_data/script.module.keyboard.chinese/resources'
+let g:netrw_dirhist_3='/home/osmc/.kodi/userdata/addon_data/script.module.keyboard.chinese/resources/skins'
+let g:netrw_dirhist_4='/home/osmc/.kodi/userdata/addon_data/script.module.keyboard.chinese/resources/skins/skin.confluence'
+let g:netrw_dirhist_5='/home/osmc/.kodi/userdata/addon_data/script.module.keyboard.chinese/resources/skins/skin.confluence/720p'

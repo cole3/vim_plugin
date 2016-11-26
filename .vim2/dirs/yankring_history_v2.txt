@@ -1,0 +1,100 @@
+#,v
+RCC_APB2Periph_GPIOC,v
+GPIO_Pin_12,v
+GPIOC,v
+LED_PORT,v
+/,v
+DelayByDiv,v
+#include "stm32f10x_flash.h",V
+void FLASH_ReadOutProtection_Enable(void);,V
+void delay(void){    unsigned int n = 10000000;    while (n--);},V
+     x=50.0f;    while (x > 0.0001f)        x = x/1.0001f; // delay loop,V
+float,v
+Delay,v
+-,v
+LDLIBS,v
+	$(CC) -o $(PREFIX)/$(EXE).elf $(LDFLAGS) $(SRCPATH1)/*.c,V
+Libraries/,v
+LDFLAGS+=-I$(LIBTOP)/STM32_USB-FS-Device_Lib_V4.0.0/Libraries/CMSIS/Include,V
+Libraries/CMSIS/Device/ST/STM32F10x/Include,v
+LDFLAGS+=-I$(LIBTOP)/STM32_USB-FS-Device_Lib_V4.0.0/Libraries/CMSIS/Device/ST/STM32F10x/Include,V
+LDFLAGS+=-nostartfiles -Wl,--gc-sections,-Tlinker.ld,V
+.,v
+STM32_USB-FS-Device_Lib_V4.0.0,v
+	rm -f $(PREFIX)/*.info_code,V
+	rm -f $(PREFIX)/*.elf ,V
+$(PREFIX)/*.elf,v
+	rm -f $(LIBS),V
+	rm -f $(SRCPATH3)/*.o	rm -f $(SRCPATH4)/*.o,V
+SRCPATH2,v
+	@echo "Building $@ part1..."	@cd $(SRCPATH1) && \		$(CC) $(CFLAGSlib) \		system_stm32f10x.c	@echo "Building $@ part2..."	@cd $(SRCPATH2) && \		$(CC) $(CFLAGSlib) \		-D"assert_param(expr)=((void)0)" \		*.c	@echo "Aring $@ ..."	@$(AR) cr $@ \		$(SRCPATH1)/*.o \		$(SRCPATH2)/*.o	@echo "done.",V
+	@echo "done.",V
+	@echo "Building $@ part1...",V
+src:,V
+E,v
+$(PREFIX)/,v
+PREFIX,v
+		--no-whole-archive ,V
+--no-whole-archive,v
+		$(LDLIBS),V
+SRCPATH1,v
+OBJDUMP,v
+OBJDUMP=$(CROSS_COMPILE)-objdump,V
+size,v
+size=$(CROSS_COMPILE)-size,V
+GDB,v
+B,v
+D,v
+G,v
+GDB=$(CROSS_COMPILE)-gdb,V
+LDFLAGS,v
+CFLAGSlib+=-D ,V
+STM32F10X_HD -D VECT_TAB_FLASH -D USE_$(PLATFORM) -D USE_STDPERIPH_DRIVER,v
+-L$(LIBDIR) -nostartfiles -Wl,--gc-sections,-Tlinker.ld,v
+-g -mcpu=cortex-m3 -mthumb -O0,v
+libstm32all.a:	@echo "Building $@ part1..."	@cd $(SRCPATH3) && \		$(CC) $(CFLAGSlib) \		*.c	@echo "Building $@ part2..."	@cd $(SRCPATH4) && \		$(CC) $(CFLAGSlib) \		*.c	@echo "Aring $@ ..."	@$(AR) cr $@ \		$(SRCPATH1)/*.o \		$(SRCPATH2)/*.o \		$(SRCPATH3)/*.o \		$(SRCPATH4)/*.o	@echo "done.",V
+libstm32.a,v
+			-I$(TOP)/Libraries/CMSIS/Device/ST/STM32F10x/Include \			-I$(TOP)/Libraries/STM32F10x_StdPeriph_Driver/inc \			-I$(TOP)/Libraries/STM32_USB-FS-Device_Driver/inc \			-I$(TOP)/Utilities/STM32_EVAL/$(PLATFORM) \			-I$(TOP)/Utilities/STM32_EVAL/Common \			-I$(TOP)/Projects/Custom_HID/inc,V
+CFLAGSlib+=-lstm32,V
+CFLAGSlib+=-D STM32F10X_HD -D VECT_TAB_FLASH -D USE_$(PLATFORM) -D USE_STDPERIPH_DRIVER,V
+SRCPATH2=$(TOP)/Libraries/STM32F10x_StdPeriph_Driver/srcSRCPATH3=$(TOP)/Libraries/STM32_USB-FS-Device_Driver/srcSRCPATH4=$(TOP)/Projects/Custom_HID/src,V
+,V
+/* * If FLASH readout protection not already set, enable protection and reset device * * NOTES: The user area of the Flash memory can be protected against read by untrusted code. * Protection is enabled only for firmware compiled with flag RELEASE_PUBLIC set (see makefile). * When readout protection is set debugging via JTAG is not possible any more. * If the read protection is set while the debugger is still connected through JTAG/SWD, apply a * POR (power-on reset) instead of a system reset (without debugger connection).*/void FLASH_ReadOutProtection_Enable(void){    if (FLASH_GetReadOutProtectionStatus() != SET)    {#ifdef RELEASE_PUBLIC // HINT: define is done via makefile        FLASH_Unlock();        if (FLASH_ReadOutProtection(ENABLE) != FLASH_COMPLETE) // set readout protection        {ERROR: could not program read protection        }        else            NVIC_SystemReset(); // protection set --> reset device to enable protection#else        // output warning message#endif    }},V
+    FLASH_ReadOutProtection_Enable(); // enable ReadOutProtection when running Release code,V
+//////////////,2
+// If FLASH readout protection not already set, enable protection and reset device//// NOTES: The user area of the Flash memory can be protected against read by untrusted code.// Protection is enabled only for firmware compiled with flag RELEASE_PUBLIC set (see makefile).// When readout protection is set debugging via JTAG is not possible any more.// If the read protection is set while the debugger is still connected through JTAG/SWD, apply a// POR (power-on reset) instead of a system reset (without debugger connection).,V
+// // // // // // ,3
+// // // // // // // // // ,3
+    // Configure PC12 to mode: slow rise-time, pushpull output,V
+    // GPIOC Periph clock enable,V
+int argc, char *argv[],v
+// // // // // // // // // // // // // // // // // ,3
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////,2
+,V
+,V
+*,v
+    /*STM32F103RBT --> 0x08000000+126K, 2K*/    EEMUL (RWX) : ORIGIN = 0x08000000+126K, LENGTH = 2K    /*STM32F103RET --> 0x08000000+508K, 4K*/,V
+    /*STM32F103RET --> 64K*/,V
+    /*STM32F103RBT --> 20K*/    RAM (RWX) : ORIGIN = 0x20000000 , LENGTH = 20K,V
+},V
+_estack,V
+  while (1)  {  },V
+tshow:	@echo "######################################################################################################"	@echo "######## optimize settings: $(InfoTextLib), $(InfoTextSrc)"	@echo "######################################################################################################",V
+",v
+	rm -f $(TOP)/Libraries/STM32F10x_StdPeriph_Driver/src/*.o	rm -f $(TOP)/Libraries/STM32F10x_StdPeriph_Driver/src/*.o	rm -f $(TOP)/Libraries/STM32_USB-FS-Device_Driver/src/*.o	rm -f $(TOP)/Projects/Custom_HID/src/*.o,V
+	rm -f $(SRCPATH1)/*.o,V
+$(SRCPATH1)/*.o,v
+L,v
+A,v
+V,v
+_,v
+0,v
+1,v
+2,v
+3,v
+M,v
+T,v
+S,v
+Utilities/STM32_EVAL/STM3210B_EVAL,v
+			-I$(TOP)/Utilities/STM32_EVAL/STM3210B_EVAL \,V
+Libraries/STM32_USB-FS-Device_Driver/inc,v
